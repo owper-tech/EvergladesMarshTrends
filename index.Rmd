@@ -258,6 +258,7 @@ datatable(ann.kendall,filter="top",rownames = NA,escape=F,
 
 ***
 <a name="dataviz"></a>
+
 ### Site Specific Trends
 
 **Explaination**
@@ -285,13 +286,13 @@ bsselect(site_plots, type = "img", selected = "LOXA101",
 --->
 
 
-### Station {.tabset .tabset-dropdown}
+#### Station {.tabset .tabset-dropdown}
 
 ```{r ,results='asis',echo=F}
 wq.sites=unique(station.list2$alias)
 for(i in 1:length(wq.sites)){
    cat('\n')
-   cat("####",wq.sites[i],"\n")
+   cat("#####",wq.sites[i],"\n")
    
    # knitr::include_graphics(paste("Plots/site_trend/",wq.sites[i],".png",sep=""))
    ## known issue for 'include_graphics' to not work
