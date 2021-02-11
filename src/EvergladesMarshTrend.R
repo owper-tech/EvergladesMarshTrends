@@ -421,7 +421,7 @@ vec.val=seq(-1*rng,rng,1)
 cols=colorRampPalette(c('lightblue', 'lightgreen','tomato'))(length(vec.val))
 cols.val=cols[findInterval(tmp.dat.AGM$anom,vec.val)]
 par(lwd=0.8)
-x=barplot(tmp.dat.AGM$anom,ylim=ylim.val,ann=F,axes=F,col=NA,border=NA)
+x=barplot(tmp.dat.AGM$anom,ylim=ylim.val,ann=F,axes=F,col=NA,border=NA,space=0)
 abline(h=ymaj,v=x[seq(1,length(x),by.x)],lty=3,col="grey",lwd=1)
 x=barplot(tmp.dat.AGM$anom,ylim=ylim.val,ann=F,axes=F,col=cols.val,space=0,add=T)
 abline(h=0,lwd=1)
