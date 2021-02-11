@@ -304,6 +304,9 @@ for(i in 1:length(wq.sites)){
 
 ### References
 
+Bronaugh DB, Werner A (2019) Zhang + Yue-Pilon trends package. CRAN R-Project. [https://cran.r-project.org/web/packages/zyp/](https://cran.r-project.org/web/packages/zyp/){target="_blank"}. 
+
+
 FDEP (2004) Data Quality Screening Protocol. Florida Department of Environmental Protection,
 Tallahassee, FL. July 15, 2004. Available online at
 [http://www.dep.state.fl.us/everglades/files/criterion_ScreeningProtocol.pdf](http://www.dep.state.fl.us/everglades/files/criterion_ScreeningProtocol.pdf){target="_blank"}.
