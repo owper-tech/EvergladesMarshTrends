@@ -211,7 +211,7 @@ Generally, TP concentrations generally exhibited a general north-to-south (spati
 
 Stations specific annual trend results can be found in [Table 1](#tab1).
 
-Station specific monthly and annual plots can be found in the [interactive Figure 4](#dataviz)
+Station specific monthly and annual plots can be found in the [drop-down](#dataviz) menu below.
 
 <br>
 
@@ -257,8 +257,8 @@ datatable(ann.kendall,filter="top",rownames = NA,escape=F,
 
 
 ***
-
-### Site Specific Trends <a name="dataviz"></a>
+<a name="dataviz"></a>
+### Site Specific Trends
 
 **Explaination**
 
@@ -297,7 +297,7 @@ for(i in 1:length(wq.sites)){
    ## known issue for 'include_graphics' to not work
    cat(paste0("![](Plots/site_trend/",wq.sites[i],".png)","\n"))
    cat('\n')
-}
+  }
 ```
 
 ***
