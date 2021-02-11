@@ -123,9 +123,9 @@ station.list%>%
 
 ```
 
-### [`r paste(fontawesome::fa("github"),"Source Code")`](https://github.com/owper-tech/EvergladesMarshTrend){target="_blank"}
+### [`r paste(fontawesome::fa("github"),"Source Code")`](https://github.com/owper-tech/EvergladesMarshTrends){target="_blank"}
 
-* GitHub repo [https://github.com/owper-tech/EvergladesMarshTrend](https://github.com/owper-tech/EvergladesMarshTrend){target="_blank"}
+* GitHub repo [https://github.com/owper-tech/EvergladesMarshTrends](https://github.com/owper-tech/EvergladesMarshTrends){target="_blank"}
 
 ***
 
