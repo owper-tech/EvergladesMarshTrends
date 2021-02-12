@@ -303,7 +303,9 @@ for(i in 1:length(wq.sites)){
 
 ***
 
-### References
+#### {- .leave-tabset}
+
+## References
 
 Bronaugh DB, Werner A (2019) Zhang + Yue-Pilon trends package. CRAN R-Project. [https://cran.r-project.org/web/packages/zyp/](https://cran.r-project.org/web/packages/zyp/){target="_blank"}. 
 
