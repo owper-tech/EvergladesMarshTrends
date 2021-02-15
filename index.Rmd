@@ -265,7 +265,10 @@ datatable(ann.kendall,filter="top",rownames = NA,escape=F,
 
 Presented here are site specific TP concentration information. The plots are broken into monthly (left), annual (middle) and a map with the monitoring location identified (right). The top-left plot, shows the monthly distribution of TP concentrations from May to the following April (like the Florida Water Year) with individual samples presented in shaded gray relative to the period of record monthly mean concentration. The bottom-left plot is a box-and-whisker plot of monthly TP concentrations for the given site intended to represent the median (and inter-quantile range) of monthly TP concentrations within the period of record. The top-middle plot is the annual geometric mean TP concentration relative to the Thiel-Sen line (trend) with the `r "\u00B1"` 95% confidence interval and the average geometric mean concentration during the period of record. The bottom-middle plot is the annual TP anomalies plot, annual TP anomalies are defined as the difference of the annual geometric mean and the long term average geometric mean (i.e. period of record average annual geometric mean TP concentration). 
 
+<!--
 **Note:** If the lower 95% confidence interval has negative values it will not plot in the plots below due to the log-scale axis.
+-->
+
 
 <br>
 <!--

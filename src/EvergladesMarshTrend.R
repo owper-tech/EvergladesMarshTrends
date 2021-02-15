@@ -341,9 +341,9 @@ par(family="serif",mar=c(2,3.5,1,1),oma=c(1,1,0.5,1),xpd=F)
 layout(matrix(c(1:6),2,3,byrow=F))
 
 cols <- colorRampPalette(c('lightblue', 'lightgreen'))(12)
-max.val=ceiling(max(tmp.dat$AMean,na.rm=T)+max(tmp.dat$AMean,na.rm=T)*0.1)
+max.val=ceiling(max(tmp.dat$AMean,na.rm=T)+max(tmp.dat$AMean,na.rm=T)*0.2)
 #ylim.val=c(0,max.val);by.y=if(max.val>100){20}else{5};ymaj=seq(ylim.val[1],ylim.val[2],by.y);ymin=seq(ylim.val[1],ylim.val[2],by.y/2)
-ylim.val=c(1,1000);ymaj=log.scale.fun(ylim.val,"major");ymin=log.scale.fun(ylim.val,"minor")
+ylim.val=c(1,max.val);ymaj=log.scale.fun(ylim.val,"major");ymin=log.scale.fun(ylim.val,"minor")
 xlim.val=c(1,12);by.x=1;xmaj=1:12;xmaj.lab=c(5:12,1:4)#seq(xlim.val[1],xlim.val[2],by.x);xmin=seq(xlim.val[1],xlim.val[2],by.x/by.x)
 
 plot(AMean~month.plt,tmp.dat,ylim=ylim.val,xlim=xlim.val,type="n",ann=F,axes=F,log="y")
@@ -383,16 +383,21 @@ mtext(side=2,line=2.5,"TP (\u03BCg L\u207B\u00B9)",cex=0.8)
 # axis_fun(1,ymaj,ymin,ymaj,line=-0.5);box(lwd=1)
 # mtext(side=1,line=2.5,"TP (\u03BCg L\u207B\u00B9)")
 
+tmp.dat.AGM2=merge(tmp.dat.AGM,expand.grid(alias=unique(tmp.dat$alias),WY=seq(1979,2020,1)),all.y=T)
 
-ylim.val=c(1,100);ymaj=log.scale.fun(ylim.val,"major");ymin=log.scale.fun(ylim.val,"minor")#by.y=20;ymaj=seq(ylim.val[1],ylim.val[2],by.y);ymin=seq(ylim.val[1],ylim.val[2],by.y/2)
+min.val=if(min(tmp.dat.AGM$AGM)<10){0}else{10}# ceiling(min(tmp.dat.AGM$AGM,na.rm=T)-min(tmp.dat.AGM$AGM,na.rm=T)*0.1)
+max.val=ceiling(max(tmp.dat.AGM$AGM,na.rm=T)+max(tmp.dat.AGM$AGM,na.rm=T)*0.10)
+by.y=if(min.val==0&max.val<=10){2}else if(max.val<=15){5}else if(min.val==0&max.val<=20|max.val<=20){10}else if(min.val==0&max.val<30){20}else if(min.val==10&max.val<40){10}else{50}
+ylim.val=c(min.val,max.val);ymaj=seq(ylim.val[1],ylim.val[2],by.y);ymin=seq(ylim.val[1],ylim.val[2],by.y/2)# ymaj=log.scale.fun(ylim.val,"major");ymin=log.scale.fun(ylim.val,"minor")#by.y=20;ymaj=seq(ylim.val[1],ylim.val[2],by.y);ymin=seq(ylim.val[1],ylim.val[2],by.y/2)
 xlim.val=c(1979,2020);by.x=10;xmaj=seq(xlim.val[1],xlim.val[2],by.x);xmin=seq(xlim.val[1],xlim.val[2],by.x/by.x)
 
-plot(AGM~WY,tmp.dat.AGM,ylim=ylim.val,xlim=xlim.val,type="n",ann=F,axes=F,log="y")
+plot(AGM~WY,tmp.dat.AGM,ylim=ylim.val,xlim=xlim.val,type="n",ann=F,axes=F)
 abline(h=ymaj,v=xmaj,lty=3,col="grey")
-with(tmp.dat.AGM,pt_line(WY,AGM,2,"grey",1,21,"lightgreen",cex=1.25))
+with(tmp.dat.AGM2,pt_line(WY,AGM,2,"grey",1,21,"lightgreen",cex=1.25))
 mod=mblm::mblm(AGM~WY,tmp.dat.AGM)
 mod.fit=predict(mod,tmp.dat.AGM,interval="confidence")
-if(min(mod.fit[,2])>0){shaded.range(tmp.dat.AGM$WY,mod.fit[,2],mod.fit[,3],"grey",lty=0)}
+# if(min(mod.fit[,2])>0){shaded.range(tmp.dat.AGM$WY,mod.fit[,2],mod.fit[,3],"grey",lty=0)}
+shaded.range(tmp.dat.AGM$WY,mod.fit[,2],mod.fit[,3],"grey",lty=0)
 lines(tmp.dat.AGM$WY,mod.fit[,1],lty=2,col="black")
 lines(range(tmp.dat.AGM$WY),rep(min(tmp.dat.AGM$LTmeanGM,na.rm=T),2),col=adjustcolor("indianred1",0.5),lwd=2)
 axis_fun(1,xmaj,xmin,xmaj,line=-0.5)
@@ -414,16 +419,15 @@ mod=mblm::mblm(anom~WY,subset(tmp.dat.AGM,is.na(anom)==F),repeated = F)
 mod.fit2=data.frame(WY=seq(min(tmp.dat.AGM$WY,na.rm=T),max(tmp.dat.AGM$WY,na.rm=T)))
 mod.fit2=cbind(mod.fit2,predict(mod,mod.fit2,interval="confidence"))
 mod.fit2=merge(mod.fit2,expand.grid(alias=unique(tmp.dat$alias),WY=seq(1979,2020,1)),"WY",all.y=T)
-tmp.dat.AGM=merge(tmp.dat.AGM,expand.grid(alias=unique(tmp.dat$alias),WY=seq(1979,2020,1)),all.y=T)
 
 # Color ramp for all the (filled) data.
 vec.val=seq(-1*rng,rng,1)
 cols=colorRampPalette(c('lightblue', 'lightgreen','tomato'))(length(vec.val))
-cols.val=cols[findInterval(tmp.dat.AGM$anom,vec.val)]
+cols.val=cols[findInterval(tmp.dat.AGM2$anom,vec.val)]
 par(lwd=0.8)
-x=barplot(tmp.dat.AGM$anom,ylim=ylim.val,ann=F,axes=F,col=NA,border=NA,space=0)
+x=barplot(tmp.dat.AGM2$anom,ylim=ylim.val,ann=F,axes=F,col=NA,border=NA,space=0)
 abline(h=ymaj,v=x[seq(1,length(x),by.x)],lty=3,col="grey",lwd=1)
-x=barplot(tmp.dat.AGM$anom,ylim=ylim.val,ann=F,axes=F,col=cols.val,space=0,add=T)
+x=barplot(tmp.dat.AGM2$anom,ylim=ylim.val,ann=F,axes=F,col=cols.val,space=0,add=T)
 abline(h=0,lwd=1)
 lines(x,mod.fit2$fit,lty=1,col="black",lwd=2)
 axis_fun(1,x[seq(1,length(x),by.x)],x,xmaj,line=-0.5)
